@@ -1,20 +1,18 @@
-import { Controller, Get, Res, Post, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, Res, Post, HttpCode, UseGuards, Body, BadRequestException } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { AuthGuard } from '../auth.guard';
 
 @Controller('payment')
 export class PaymentController {
-  constructor(private readonly appService: PaymentService) { }
-
-  @Get('health')
-  checkHealth(@Res() res): object {
-    return res.json({ status: 'working' });
-  }
+  constructor(private readonly paymentService: PaymentService) { }
 
   @Post()
   @UseGuards(AuthGuard)
   @HttpCode(200)
-  makePayment(@Res() res): object {
-    return res.json({ paymentStatus: true, transactionId: (Math.random() * 1000000).toString() });
+  makePayment(@Body() body: any): object {
+    if (!body) throw new BadRequestException('Please provide valid request body')
+    if (!body.amount) throw new BadRequestException('Please provide valid order amount')
+    if (!body.orderId) throw new BadRequestException('Please provide valid order id')
+    return this.paymentService.doPayment(body);
   }
 }
