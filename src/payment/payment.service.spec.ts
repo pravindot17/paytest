@@ -12,7 +12,9 @@ describe('PaymentService', () => {
     service = module.get<PaymentService>(PaymentService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('do payment', () => {
+    let response = service.doPayment({ amount: 1000, orderId: 'new_ID' });
+    expect(response.paymentStatus === true || response.paymentStatus === false).toEqual(true);
+    expect(response.transactionId === null || typeof response.transactionId === 'string').toEqual(true);
   });
 });
