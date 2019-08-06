@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 describe('AppController', () => {
-  let appService: AppService;
   let appController: AppController;
 
   beforeAll(async () => {
@@ -13,7 +12,6 @@ describe('AppController', () => {
     }).compile();
 
     appController = app.get<AppController>(AppController);
-    appService = app.get<AppService>(AppService);
   });
 
   describe('App Controller', () => {
@@ -22,7 +20,6 @@ describe('AppController', () => {
     });
 
     it('should return application title', () => {
-      jest.spyOn(appService, 'getTitle').mockImplementation(() => '<h1>Payment test app!</h1>');
       expect(appController.getTitle()).toEqual('<h1>Payment test app!</h1>');
     });
   });
