@@ -16,7 +16,7 @@ class PaymentInfoDto {
 }
 
 export class MakePaymentDto {
-  @IsString() @Length(10, 40)
+  @IsString() @Length(5, 40)
   public orderId: string;
 
   @IsNumber()
