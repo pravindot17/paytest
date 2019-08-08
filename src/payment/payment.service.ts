@@ -1,8 +1,9 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
+import { MakePaymentDto } from './dto/make-payment.dto';
 
 @Injectable()
 export class PaymentService {
-  doPayment(body) {
+  doPayment(body: MakePaymentDto) {
     let paymentStatus = this.getPaymentStatus()
     let paymentResponse = { paymentStatus, transactionId: null }
     if (paymentStatus) paymentResponse.transactionId = this.generateTransactionId();

@@ -1,6 +1,7 @@
-import { Controller, Get, Res, Post, HttpCode, UseGuards, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, HttpCode, UseGuards, Body } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { AuthGuard } from '../auth.guard';
+import { MakePaymentDto } from './dto/make-payment.dto';
 
 @Controller('payment')
 export class PaymentController {
@@ -9,10 +10,7 @@ export class PaymentController {
   @Post()
   @UseGuards(AuthGuard)
   @HttpCode(200)
-  makePayment(@Body() body: any): object {
-    if (!body) throw new BadRequestException('Please provide valid request body')
-    if (!body.amount) throw new BadRequestException('Please provide valid order amount')
-    if (!body.orderId) throw new BadRequestException('Please provide valid order id')
+  makePayment(@Body() body: MakePaymentDto): object {
     return this.paymentService.doPayment(body);
   }
 }
