@@ -1,13 +1,13 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { MakePaymentDto } from './dto/make-payment.dto';
 
 @Injectable()
 export class PaymentService {
   doPayment(body: MakePaymentDto) {
-    let paymentStatus = this.getPaymentStatus()
-    let paymentResponse = { paymentStatus, transactionId: null }
-    if (paymentStatus) paymentResponse.transactionId = this.generateTransactionId();
-    return paymentResponse
+    const paymentStatus = this.getPaymentStatus();
+    const paymentResponse = { paymentStatus, transactionId: null };
+    if (paymentStatus) { paymentResponse.transactionId = this.generateTransactionId(); }
+    return paymentResponse;
   }
 
   private getPaymentStatus() {

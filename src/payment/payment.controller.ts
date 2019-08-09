@@ -10,7 +10,7 @@ export class PaymentController {
   @Post()
   @UseGuards(AuthGuard)
   @HttpCode(200)
-  makePayment(@Body() body: MakePaymentDto): object {
-    return this.paymentService.doPayment(body);
+  makePayment(@Body() makePaymentDto: MakePaymentDto): object {
+    return this.paymentService.doPayment(makePaymentDto);
   }
 }

@@ -1,25 +1,25 @@
-import { IsString, Length, ValidateNested, IsNumber } from 'class-validator';
+import { IsString, Length, ValidateNested, IsNumber, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 
 class PaymentInfoDto {
-  @IsString() @Length(3, 64)
+  @IsNotEmpty() @IsString()
   public readonly method: string;
 
-  @IsString() @Length(12, 20)
+  @IsNotEmpty() @IsString() @Length(12, 20)
   public readonly cardNumber: string;
 
-  @IsString() @Length(5)
+  @IsNotEmpty() @IsString() @Length(5)
   public readonly expiry: string;
 
-  @IsString() @Length(4)
+  @IsNotEmpty() @IsString() @Length(4)
   public readonly pin: string;
 }
 
 export class MakePaymentDto {
-  @IsString() @Length(5, 40)
+  @IsNotEmpty() @IsString() @Length(5, 40)
   public orderId: string;
 
-  @IsNumber()
+  @IsNotEmpty() @IsNumber()
   public readonly totalAmount: number;
 
   @ValidateNested({ each: true })
