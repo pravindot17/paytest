@@ -12,7 +12,7 @@ export class PaymentService {
 
   private getPaymentStatus() {
     const random = Math.floor((Math.random() * 10) + 1);
-    if (random <= 7) { return true; } else { return false; }
+    if (random <= 6) { return true; } else { return false; }
   }
 
   private generateTransactionId(length = 10) {
